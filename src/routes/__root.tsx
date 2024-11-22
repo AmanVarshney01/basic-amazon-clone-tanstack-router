@@ -1,15 +1,23 @@
-import "@/index.css";
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import amazonLogo from "@/assets/amazon.svg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import amazonLogo from "@/assets/amazon.svg";
-import { useState } from "react";
-import { z } from "zod";
+import "@/index.css";
+import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
+import { lazy, Suspense, useState } from "react";
+import { z } from "zod";
+
+const TanStackRouterDevtools =
+  process.env.NODE_ENV === "production"
+    ? () => null
+    : lazy(() =>
+        import("@tanstack/router-devtools").then((res) => ({
+          default: res.TanStackRouterDevtools,
+        })),
+      );
 
 const searchSchema = z.object({
-  q: z.string().optional().default(""),
+  q: z.string().optional(),
 });
 
 export const Route = createRootRoute({
@@ -58,7 +66,9 @@ function RootComponent() {
         </div>
       </header>
       <Outlet />
-      <TanStackRouterDevtools />
+      <Suspense>
+        <TanStackRouterDevtools />
+      </Suspense>
     </div>
   );
 }

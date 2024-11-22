@@ -1,13 +1,14 @@
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { createFileRoute } from "@tanstack/react-router";
-import { Badge } from "@/components/ui/badge";
+import { LoaderCircle } from "lucide-react";
 
 type Product = {
   id: number;
@@ -36,8 +37,8 @@ export const Route = createFileRoute("/")({
     return { products: filteredProducts };
   },
   pendingComponent: () => (
-    <div className="flex justify-center items-center">
-      <div className="size-8 rounded-full border-2 border-b-0 border-blue-500 animate-spin"></div>
+    <div className=" flex justify-center items-center">
+      <LoaderCircle className="animate-spin size-6" />
     </div>
   ),
 });
