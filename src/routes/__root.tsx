@@ -31,7 +31,9 @@ function RootComponent() {
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen max-w-7xl mx-auto">
       <header className="flex flex-row justify-between gap-2 p-3 border-b sticky top-0 bg-white">
-        <img src={amazonLogo} alt="amazon" className="size-8" />
+        <Link to="/" search={{}}>
+          <img src={amazonLogo} alt="amazon" className="size-8" />
+        </Link>
         <div className="flex flex-row gap-3 items-center">
           <form
             onSubmit={(e) => {
